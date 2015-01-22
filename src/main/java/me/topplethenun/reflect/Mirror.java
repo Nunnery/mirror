@@ -153,23 +153,7 @@ public final class Mirror {
         // do nothing
     }
 
-    enum ClassType {
-        NMS("net.minecraft.server."),
-        CB("org.bukkit.craftbukkit.");
-
-        private final String pack;
-
-        private ClassType(String s) {
-            pack = s;
-        }
-
-        @Override
-        public String toString() {
-            return pack;
-        }
-    }
-
-    static class ArrayWrapper<E> {
+    public static class ArrayWrapper<E> {
         private E[] elements;
 
         public ArrayWrapper(E[] elements) {
@@ -201,6 +185,22 @@ public final class Mirror {
         @Override
         public int hashCode() {
             return elements != null ? Arrays.hashCode(elements) : 0;
+        }
+    }
+
+    public enum ClassType {
+        NMS("net.minecraft.server."),
+        CB("org.bukkit.craftbukkit.");
+
+        private final String pack;
+
+        private ClassType(String s) {
+            pack = s;
+        }
+
+        @Override
+        public String toString() {
+            return pack;
         }
     }
 
