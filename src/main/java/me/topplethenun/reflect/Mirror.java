@@ -188,7 +188,7 @@ public final class Mirror {
         }
     }
 
-    public enum ClassType {
+    public static enum ClassType {
         NMS("net.minecraft.server."),
         CB("org.bukkit.craftbukkit.");
 
