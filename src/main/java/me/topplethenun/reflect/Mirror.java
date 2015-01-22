@@ -93,8 +93,10 @@ public final class Mirror {
         if (methodMap.containsKey(wrapped)) {
             return methodMap.get(wrapped);
         }
+        Class<?>[] primArgs = toPrimitiveTypeArray(args);
         for (Method m : clazz.getDeclaredMethods()) {
-            if (m.getName().equals(methodName) && Arrays.equals(m.getParameterTypes(), args)) {
+            Class<?>[] primParam = toPrimitiveTypeArray(m.getParameterTypes());
+            if (m.getName().equals(methodName) && isArrayTypeEqual(primArgs, primParam)) {
                 m.setAccessible(true);
                 methodMap.put(wrapped, m);
                 return m;
@@ -151,57 +153,6 @@ public final class Mirror {
 
     private Mirror() {
         // do nothing
-    }
-
-    public static class ArrayWrapper<E> {
-        private E[] elements;
-
-        public ArrayWrapper(E[] elements) {
-            this.elements = elements;
-        }
-
-        public E[] getElements() {
-            return elements;
-        }
-
-        public void setElements(E[] elements) {
-            this.elements = elements;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) {
-                return true;
-            }
-            if (!(o instanceof ArrayWrapper)) {
-                return false;
-            }
-
-            ArrayWrapper that = (ArrayWrapper) o;
-
-            return Arrays.equals(elements, that.elements);
-        }
-
-        @Override
-        public int hashCode() {
-            return elements != null ? Arrays.hashCode(elements) : 0;
-        }
-    }
-
-    public static enum ClassType {
-        NMS("net.minecraft.server."),
-        CB("org.bukkit.craftbukkit.");
-
-        private final String pack;
-
-        private ClassType(String s) {
-            pack = s;
-        }
-
-        @Override
-        public String toString() {
-            return pack;
-        }
     }
 
 }
