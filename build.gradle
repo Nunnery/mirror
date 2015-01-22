@@ -1,0 +1,51 @@
+plugins {
+    id "java"
+    id "maven-publish"
+    id "com.github.hierynomus.license" version "0.11.0"
+}
+
+sourceCompatibility = 1.7
+
+group = "me.topplethenun"
+archivesBaseName = "mirror"
+version = "0.0.1-SNAPSHOT"
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://hub.spigotmc.org/nexus/content/groups/public/"
+    }
+}
+
+dependencies {
+    compile "org.bukkit:bukkit:latest.integration"
+    testCompile "junit:junit:4.11"
+}
+
+license {
+    header file('HEADER')
+    ignoreFailures false
+    strictCheck true
+    mapping {
+        java = 'SLASHSTAR_STYLE'
+    }
+}
+
+publishing {
+    publications {
+        java(MavenPublication) {
+            artifactId = "mirror"
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            url "http://repo-topplethenun.rhcloud.com/nexus/content/repositories/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases'}/"
+            name "nunnerycode-repo"
+            credentials {
+                username System.getenv("nexusUsername") ?: nexusUsername
+                password System.getenv("nexusPassword") ?: nexusPassword
+            }
+        }
+    }
+}
