@@ -6,9 +6,9 @@ plugins {
 
 sourceCompatibility = 1.7
 
-group = "me.topplethenun"
+group = "com.tealcube.minecraft.bukkit"
 archivesBaseName = "mirror"
-version = "0.0.1-SNAPSHOT"
+version = "1.0.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -18,7 +18,7 @@ repositories {
 }
 
 dependencies {
-    compile "org.bukkit:bukkit:latest.integration"
+    compile "org.bukkit:bukkit:1.8-R0.1-SNAPSHOT"
     testCompile "junit:junit:4.11"
 }
 
@@ -40,8 +40,8 @@ publishing {
     }
     repositories {
         maven {
-            url "http://repo-topplethenun.rhcloud.com/nexus/content/repositories/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases'}/"
-            name "nunnerycode-repo"
+            url "http://tealcube.com/nexus/content/repositories/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases'}/"
+            name "TealCube"
             credentials {
                 username System.getenv("nexusUsername") ?: nexusUsername
                 password System.getenv("nexusPassword") ?: nexusPassword
