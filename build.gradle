@@ -8,7 +8,7 @@ sourceCompatibility = 1.7
 
 group = "com.tealcube.minecraft.bukkit"
 archivesBaseName = "mirror"
-version = "1.0.0-SNAPSHOT"
+version = "1.0.0"
 
 repositories {
     mavenCentral()
