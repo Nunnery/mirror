@@ -1,14 +1,24 @@
 plugins {
     id "java"
-    id "maven-publish"
     id "com.github.hierynomus.license" version "0.11.0"
+    id "pl.allegro.tech.build.axion-release" version "1.2.4"
+    id "signing"
 }
 
 sourceCompatibility = 1.7
 
+scmVersion {
+    tag {
+        prefix = project.name
+    }
+    createReleaseCommit true
+    releaseCommitMessage { version, position -> "[ci skip] release version: " + version}
+}
+
 group = "com.tealcube.minecraft.bukkit"
-archivesBaseName = "mirror"
-version = "1.0.1-SNAPSHOT"
+version = scmVersion.version
+
+apply from: "publish-java.gradle"
 
 repositories {
     mavenCentral()
@@ -19,7 +29,20 @@ repositories {
 
 dependencies {
     compile "org.bukkit:bukkit:1.8-R0.1-SNAPSHOT"
-    testCompile "junit:junit:4.11"
+}
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
 }
 
 license {
@@ -28,24 +51,5 @@ license {
     strictCheck true
     mapping {
         java = 'SLASHSTAR_STYLE'
-    }
-}
-
-publishing {
-    publications {
-        java(MavenPublication) {
-            artifactId = "mirror"
-            from components.java
-        }
-    }
-    repositories {
-        maven {
-            url "http://tealcube.com/nexus/content/repositories/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases'}/"
-            name "TealCube"
-            credentials {
-                username System.getenv("nexusUsername") ?: nexusUsername
-                password System.getenv("nexusPassword") ?: nexusPassword
-            }
-        }
     }
 }
