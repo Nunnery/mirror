@@ -53,7 +53,7 @@
             <url>https://hub.spigotmc.org/nexus/content/groups/public</url>
         </repository>
         <repository>
-            <id>tealcube-repo</id>
+            <id>tealcube</id>
             <name>Teal Cube Public Repository</name>
             <url>http://maven.tealcube.com/artifactory/public</url>
         </repository>
@@ -131,11 +131,11 @@
 
     <distributionManagement>
         <snapshotRepository>
-            <id>tealcube-snapshots</id>
+            <id>tealcube</id>
             <url>http://maven.tealcube.com/artifactory/snapshots</url>
         </snapshotRepository>
         <repository>
-            <id>tealcube-repo</id>
+            <id>tealcube</id>
             <url>http://maven.tealcube.com/artifactory/releases</url>
         </repository>
     </distributionManagement>
