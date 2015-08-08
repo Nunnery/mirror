@@ -22,18 +22,19 @@
  */
 package com.tealcube.minecraft.bukkit.mirror;
 
+import org.bukkit.Bukkit;
+
 public enum ClassType {
-    NMS("net.minecraft.server."),
-    CB("org.bukkit.craftbukkit.");
-
-    private final String pack;
-
-    private ClassType(String s) {
-        pack = s;
-    }
-
-    @Override
-    public String toString() {
-        return pack;
-    }
+    MINECRAFT_SERVER {
+        @Override
+        public String toString() {
+            return "net.minecraft.server." + Bukkit.getServer().getClass().getPackage().getName().substring(23, 30);
+        }
+    },
+    CRAFTBUKKIT {
+        @Override
+        public String toString() {
+            return Bukkit.getServer().getClass().getPackage().getName();
+        }
+    };
 }

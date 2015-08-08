@@ -58,12 +58,12 @@ public final class Mirror {
         Preconditions.checkNotNull(className, "className cannot be null");
         Preconditions.checkNotNull(type, "type cannot be null");
         switch (type) {
-            case NMS:
+            case MINECRAFT_SERVER:
                 if (CACHED_NMS.containsKey(className)) {
                     return CACHED_NMS.get(className);
                 }
                 break;
-            case CB:
+            case CRAFTBUKKIT:
                 if (CACHED_OBC.containsKey(className)) {
                     return CACHED_OBC.get(className);
                 }
@@ -77,7 +77,7 @@ public final class Mirror {
         } catch (Exception ignored) {
             // do nothing
         }
-        if (type == ClassType.NMS) {
+        if (type == ClassType.MINECRAFT_SERVER) {
             CACHED_NMS.put(className, clazz);
         } else {
             CACHED_OBC.put(className, clazz);
