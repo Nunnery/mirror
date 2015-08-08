@@ -50,10 +50,6 @@ public final class Mirror {
         CORRESPONDING_TYPES.put(Boolean.class, boolean.class);
     }
 
-    public static String getVersion() {
-        return Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3];
-    }
-
     public static Class<?> getClass(String className, ClassType type) {
         Preconditions.checkNotNull(className, "className cannot be null");
         Preconditions.checkNotNull(type, "type cannot be null");
@@ -73,7 +69,7 @@ public final class Mirror {
         }
         Class<?> clazz = null;
         try {
-            clazz = Class.forName(type + getVersion() + "." + className);
+            clazz = Class.forName(type + "." + className);
         } catch (Exception ignored) {
             // do nothing
         }
