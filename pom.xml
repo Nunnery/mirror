@@ -131,11 +131,11 @@
 
     <distributionManagement>
         <snapshotRepository>
-            <id>tealcube</id>
+            <id>tealcube-snapshots</id>
             <url>http://maven.tealcube.com/artifactory/snapshots</url>
         </snapshotRepository>
         <repository>
-            <id>tealcube</id>
+            <id>tealcube-repo</id>
             <url>http://maven.tealcube.com/artifactory/releases</url>
         </repository>
     </distributionManagement>
