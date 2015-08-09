@@ -32,7 +32,7 @@
     </parent>
 
     <artifactId>mirror</artifactId>
-    <version>0.4.3-SNAPSHOT</version>
+    <version>0.4.2</version>
     <packaging>jar</packaging>
 
     <name>mirror</name>
