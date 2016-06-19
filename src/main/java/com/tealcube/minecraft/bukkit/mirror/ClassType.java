@@ -28,7 +28,7 @@ public enum ClassType {
     MINECRAFT_SERVER {
         @Override
         public String toString() {
-            return "net.minecraft.server." + Bukkit.getServer().getClass().getPackage().getName().substring(23, 30);
+            return "net.minecraft.server." + nmsVersion;
         }
     },
     CRAFTBUKKIT {
@@ -37,4 +37,11 @@ public enum ClassType {
             return Bukkit.getServer().getClass().getPackage().getName();
         }
     };
+
+    private static String nmsVersion;
+
+    static {
+        String bukkitPackageName = Bukkit.getServer().getClass().getPackage().getName();
+        nmsVersion = bukkitPackageName.substring(bukkitPackageName.lastIndexOf(".") + 1);
+    }
 }
